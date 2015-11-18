@@ -23,7 +23,7 @@
         </microInstructions>
     </microprogram>
     
-    	<!--  MOVER X,[[X]] -->
+	<!--  MOVER X,[[X]] -->
     <microprogram name="MOVER">
 		<parameters>
             <parameter addressingMode="IMMEDIATE"/>
@@ -230,11 +230,8 @@
             <parameter addressingMode="IMMEDIATE"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-IMMEDIATE-TO-BUS">
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
             	 <parameter name="cde" value="1" /> 
-            	 <parameter name="bus" value="BD"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DATABUS-TO-REGISTER">
             	 <parameter name="reg" value="RT" /> 
             </macroInstruction>
             <macroInstruction name="SUMAR" />
@@ -247,11 +244,8 @@
             <parameter addressingMode="DIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-DIRECT-TO-BUS">
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
             	 <parameter name="cde" value="1" /> 
-            	 <parameter name="bus" value="BD"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DATABUS-TO-REGISTER">
             	 <parameter name="reg" value="RT" /> 
             </macroInstruction>
             <macroInstruction name="SUMAR" />
@@ -264,11 +258,8 @@
             <parameter addressingMode="INDIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-INDIRECT-TO-BUS">
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
             	 <parameter name="cde" value="1" /> 
-            	 <parameter name="bus" value="BD"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DATABUS-TO-REGISTER">
             	 <parameter name="reg" value="RT" /> 
             </macroInstruction>
             <macroInstruction name="SUMAR" />
@@ -281,12 +272,9 @@
             <parameter addressingMode="REGISTER" name="reg"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-REGISTER-TO-BUS">
-            	 <parameter name="reg" value="$reg"/>
-            	 <parameter name="bus" value="BD"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DATABUS-TO-REGISTER">
-            	 <parameter name="reg" value="RT" /> 
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg"/>
+            	 <parameter name="reg2" value="RT" /> 
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -299,13 +287,9 @@
             <parameter addressingMode="IMMEDIATE"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -318,13 +302,9 @@
             <parameter addressingMode="DIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="DIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -337,13 +317,9 @@
             <parameter addressingMode="INDIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -360,7 +336,6 @@
             	 <parameter name="reg1" value="$reg" /> 
             	 <parameter name="reg2" value="RT"/>
             </macroInstruction>
-            
             <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
             	 <parameter name="cde" value="1" /> 
             	 <parameter name="reg" value="AC"/>
@@ -376,13 +351,9 @@
             <parameter addressingMode="IMMEDIATE"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -395,13 +366,9 @@
             <parameter addressingMode="DIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -414,13 +381,9 @@
             <parameter addressingMode="INDIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -452,13 +415,9 @@
             <parameter addressingMode="IMMEDIATE"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -471,13 +430,9 @@
             <parameter addressingMode="DIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -490,13 +445,9 @@
             <parameter addressingMode="INDIRECT"/>
         </parameters>
         <microInstructions>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="1" /> 
-            	 <parameter name="reg" value="AC"/>
-            </macroInstruction>
-            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
-            	 <parameter name="cde" value="2" /> 
-            	 <parameter name="reg" value="RT"/>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
             </macroInstruction>
             <macroInstruction name="SUMAR" />
 		</microInstructions>
@@ -597,34 +548,337 @@
 		</microInstructions>
     </microprogram>
 
-	<!-- RESTAR -->
+    <!-- RESTAR -->
     <microprogram name="RESTAR">
         <microInstructions>
             <signalInstruction name="UAL-OP(-)" />
             <signalInstruction name="ICP" />
 		</microInstructions>
     </microprogram>
-	
-	<!-- RESTAR X -->
+
+    <!-- RESTAR X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR [X] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR [[X]] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>    
+    
 	<!-- RESTAR REG -->
-	<!-- RESTAR X,X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg"/>
+            	 <parameter name="reg2" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram> 
+
+    <!-- RESTAR X,X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR X,[X] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- RESTAR X,[[X]] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- RESTAR X,REG -->
-	<!-- RESTAR [X],X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>   
+
+    <!-- RESTAR [X],X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR [X],[X] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- RESTAR [X],[[X]] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- RESTAR [X],REG -->
-	<!-- RESTAR [[X]],X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>  
+
+    <!-- RESTAR [[X]],X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR [[X]],[X] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- RESTAR [[X]],[[X]] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- RESTAR [[X]],REG -->
-	<!-- RESTAR REG,X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+
+    <!-- RESTAR REG,X -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- RESTAR REG,[X] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- RESTAR REG,[[X]] -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- RESTAR REG,REG -->
+    <microprogram name="RESTAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg1"/>
+            <parameter addressingMode="REGISTER" name="reg2"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg1" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg2" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="RESTAR" />
+		</microInstructions>
+    </microprogram>
 
 	<!-- MULTIPLICAR -->
     <microprogram name="MULTIPLICAR">
@@ -633,27 +887,330 @@
             <signalInstruction name="ICP" />
 		</microInstructions>
     </microprogram>
-	
-	<!-- MULTIPLICAR X -->
+
+    <!-- MULTIPLICAR X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR [X] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR [[X]] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>    
+    
 	<!-- MULTIPLICAR REG -->
-	<!-- MULTIPLICAR X,X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg"/>
+            	 <parameter name="reg2" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram> 
+
+    <!-- MULTIPLICAR X,X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR X,[X] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- MULTIPLICAR X,[[X]] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- MULTIPLICAR X,REG -->
-	<!-- MULTIPLICAR [X],X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>   
+
+    <!-- MULTIPLICAR [X],X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR [X],[X] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- MULTIPLICAR [X],[[X]] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- MULTIPLICAR [X],REG -->
-	<!-- MULTIPLICAR [[X]],X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>  
+
+    <!-- MULTIPLICAR [[X]],X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR [[X]],[X] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- MULTIPLICAR [[X]],[[X]] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- MULTIPLICAR [[X]],REG -->
-	<!-- MULTIPLICAR REG,X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+
+    <!-- MULTIPLICAR REG,X -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- MULTIPLICAR REG,[X] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- MULTIPLICAR REG,[[X]] -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- MULTIPLICAR REG,REG -->
+    <microprogram name="MULTIPLICAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg1"/>
+            <parameter addressingMode="REGISTER" name="reg2"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg1" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg2" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="MULTIPLICAR" />
+		</microInstructions>
+    </microprogram>
 
 	<!-- DIVIDIR -->
     <microprogram name="DIVIDIR">
@@ -662,27 +1219,330 @@
             <signalInstruction name="ICP" />
 		</microInstructions>
     </microprogram>
-	
-	<!-- DIVIDIR X -->
+
+    <!-- DIVIDIR X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR [X] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR [[X]] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>    
+    
 	<!-- DIVIDIR REG -->
-	<!-- DIVIDIR X,X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg"/>
+            	 <parameter name="reg2" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram> 
+
+    <!-- DIVIDIR X,X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR X,[X] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- DIVIDIR X,[[X]] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- DIVIDIR X,REG -->
-	<!-- DIVIDIR [X],X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>   
+
+    <!-- DIVIDIR [X],X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR [X],[X] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- DIVIDIR [X],[[X]] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- DIVIDIR [X],REG -->
-	<!-- DIVIDIR [[X]],X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>  
+
+    <!-- DIVIDIR [[X]],X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR [[X]],[X] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- DIVIDIR [[X]],[[X]] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- DIVIDIR [[X]],REG -->
-	<!-- DIVIDIR REG,X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+
+    <!-- DIVIDIR REG,X -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- DIVIDIR REG,[X] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- DIVIDIR REG,[[X]] -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- DIVIDIR REG,REG -->
+    <microprogram name="DIVIDIR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg1"/>
+            <parameter addressingMode="REGISTER" name="reg2"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg1" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg2" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="DIVIDIR" />
+		</microInstructions>
+    </microprogram>
 
 	<!-- COMPARAR -->
     <microprogram name="COMPARAR">
@@ -691,27 +1551,330 @@
             <signalInstruction name="ICP" />
 		</microInstructions>
     </microprogram>
-	
-	<!-- COMPARAR X -->
+
+    <!-- COMPARAR X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR [X] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR [[X]] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>    
+    
 	<!-- COMPARAR REG -->
-	<!-- COMPARAR X,X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg"/>
+            	 <parameter name="reg2" value="RT" /> 
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram> 
+
+    <!-- COMPARAR X,X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR X,[X] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- COMPARAR X,[[X]] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="IMMEDIATE" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- COMPARAR X,REG -->
-	<!-- COMPARAR [X],X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>   
+
+    <!-- COMPARAR [X],X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR [X],[X] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- COMPARAR [X],[[X]] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="DIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- COMPARAR [X],REG -->
-	<!-- COMPARAR [[X]],X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>  
+
+    <!-- COMPARAR [[X]],X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="IMMEDIATE"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR [[X]],[X] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="DIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- COMPARAR [[X]],[[X]] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-OPERANDS-TO-ALU">
+            	 <parameter name="am1" value="INDIRECT" /> 
+            	 <parameter name="am2" value="INDIRECT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- COMPARAR [[X]],REG -->
-	<!-- COMPARAR REG,X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+
+    <!-- COMPARAR REG,X -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+    
 	<!-- COMPARAR REG,[X] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
+
 	<!-- COMPARAR REG,[[X]] -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>      
+
 	<!-- COMPARAR REG,REG -->
+    <microprogram name="COMPARAR">
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg1"/>
+            <parameter addressingMode="REGISTER" name="reg2"/>
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg1" /> 
+            	 <parameter name="reg2" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg2" /> 
+            	 <parameter name="reg2" value="RT"/>
+            </macroInstruction>
+            <macroInstruction name="COMPARAR" />
+		</microInstructions>
+    </microprogram>
 	
 	<!-- SALTAR X -->
     <microprogram name="SALTAR">
@@ -900,8 +2063,7 @@
 	<!-- SALTAR-SI-ME X -->
     <microprogram name="SALTAR-SI-ME">
     	<conditions>
-    		<condition negative="false" />
-    		<condition zero="false" />
+    		<condition negative="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="IMMEDIATE"/>
@@ -915,23 +2077,249 @@
     </microprogram>
     	
 	<!-- SALTAR-SI-ME [X] -->
+    <microprogram name="SALTAR-SI-ME">
+    	<conditions>
+    		<condition negative="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+
 	<!-- SALTAR-SI-ME [[X]] -->
+    <microprogram name="SALTAR-SI-ME">
+    	<conditions>
+    		<condition negative="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    
 	<!-- SALTAR-SI-ME REG -->
-
+    <microprogram name="SALTAR-SI-ME">
+    	<conditions>
+    		<condition negative="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    
 	<!-- SALTAR-SI-MEI X -->
+    <microprogram name="SALTAR-SI-MEI">
+    	<conditions>
+    		<condition negative="true" />
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-MEI [X] -->
+    <microprogram name="SALTAR-SI-MEI">
+    	<conditions>
+    		<condition negative="true" />
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-MEI [[X]] -->
+    <microprogram name="SALTAR-SI-MEI">
+    	<conditions>
+    		<condition negative="true" />
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>	
+    
 	<!-- SALTAR-SI-MEI REG -->
-
+    <microprogram name="SALTAR-SI-MEI">
+    	<conditions>
+    		<condition negative="true" />
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    
 	<!-- SALTAR-SI-IG X -->
+    <microprogram name="SALTAR-SI-IG">
+    	<conditions>
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-IG [X] -->
-	<!-- SALTAR-SI-IG [[X]] -->
-	<!-- SALTAR-SI-IG REG -->
+    <microprogram name="SALTAR-SI-IG">
+    	<conditions>
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
 
+	<!-- SALTAR-SI-IG [[X]] -->
+    <microprogram name="SALTAR-SI-IG">
+    	<conditions>
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
+	<!-- SALTAR-SI-IG REG -->
+    <microprogram name="SALTAR-SI-IG">
+    	<conditions>
+    		<condition zero="true" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    
 	<!-- SALTAR-SI-NIG X -->
+    <microprogram name="SALTAR-SI-NIG">
+    	<conditions>
+    		<condition zero="false" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-IMMEDIATE-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-NIG [X] -->
+    <microprogram name="SALTAR-SI-NIG">
+    	<conditions>
+    		<condition zero="false" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="DIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-DIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-NIG [[X]] -->
+    <microprogram name="SALTAR-SI-NIG">
+    	<conditions>
+    		<condition zero="false" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="INDIRECT"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-INDIRECT-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
 	<!-- SALTAR-SI-NIG REG -->
+	<microprogram name="SALTAR-SI-NIG">
+    	<conditions>
+    		<condition zero="false" />
+		</conditions>
+		<parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+        </parameters>    
+        <microInstructions>
+            <macroInstruction name="FROM-REGISTER-TO-REGISTER">
+            	 <parameter name="reg1" value="$reg" /> 
+            	 <parameter name="reg2" value="CP"/>
+            </macroInstruction>        
+		</microInstructions>
+    </microprogram>
+    	
                     
     <!-- ================================= -->
     <!-- MACROS -->
@@ -1095,6 +2483,24 @@
         <microInstructions>
             <signalInstruction name="BD-$reg" />
         </microInstructions>
+    </microprogram>
+    
+    <!-- Desde operandos a ALU -->
+    <microprogram name="FROM-OPERANDS-TO-ALU" macro="true">
+    	<parameters>
+            <parameter name="am1" />
+            <parameter name="am2" />
+        </parameters>
+        <microInstructions>
+            <macroInstruction name="FROM-$am1-TO-REGISTER">
+            	 <parameter name="cde" value="1" /> 
+            	 <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <macroInstruction name="FROM-$am2-TO-REGISTER">
+            	 <parameter name="cde" value="2" /> 
+            	 <parameter name="reg" value="RT"/>
+            </macroInstruction>
+    	</microInstructions>
     </microprogram>
     
 </instructionSet>

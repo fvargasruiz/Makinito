@@ -1,9 +1,7 @@
 package dad.makinito.hardware.microcode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -73,48 +71,4 @@ public class MicroProgram {
 		return buffer.toString();
 	}
 	
-	private String translate(Map<String, String> parameters, String text) {
-		for (String name : parameters.keySet()) {
-			String value = parameters.get(name);
-			text = text.replaceAll("\\$" + name, value);
-		}
-		return text;
-	}
-	
-	private Map<String, String> parametersToMap(List<MicroParameter> microParameters) {
-		Map<String, String> map = new HashMap<String, String>();
-		for (MicroParameter mp : microParameters) {
-			map.put(mp.getName(), mp.getValue());
-		}
-		return map;
-	}
-	
-	public List<String> getSignals(Map<String, String> parameters, InstructionSet is) {
-		List<String> signals = new ArrayList<String>();
-		
-		for (MicroInstruction mi : microInstructions) {
-			
-			if (mi instanceof SignalInstruction) {
-				
-				signals.add(translate(parameters, mi.getName()));
-				
-			} else if (mi instanceof MacroInstruction) {
-				MacroInstruction macro = (MacroInstruction) mi;
-				MicroProgram subMi = is.search(macro);
-
-				Map<String, String> subMiParameters = parametersToMap(macro.getParameters());
-				Map<String, String> translatedParameters = new HashMap<String, String>();
-				for (String name : subMiParameters.keySet()) {
-					String value = subMiParameters.get(name);
-					translatedParameters.put(name, translate(parameters, value));
-				}
-				
-				signals.addAll(subMi.getSignals(translatedParameters, is));
-			}
-			
-		}
-		
-		return signals;
-	}
-
 }

@@ -2,6 +2,11 @@ package dad.makinito.hardware;
 
 import dad.makinito.software.Datum;
 
+/**
+ * Registro de estado. Contiene información sobre la última operación realizada en la UAL. 
+ * 
+ * @author Francisco Vargas
+ */
 public class FlagRegister extends Register {
 	
 	private static final int ZERO_BIT 		= 1; 

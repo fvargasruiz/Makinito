@@ -4,6 +4,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Unidad aritmético-lógica. Contiene operadores (circuitos combinacionales para +,-,*,/,=), así como 
+ * dos registros de propósito general (AC , RT) y un registro de estados (RE), con flags de la última
+ * operación realizada.
+ *  
+ * @author Francisco Vargas
+ */
 public class ALU extends FunctionalUnit {
 
 	private Register accumulator;				// registro acumulador
@@ -48,7 +55,6 @@ public class ALU extends FunctionalUnit {
 		operator.setOut(accumulator);
 		operator.setFlagRegister(flagsRegister);
 		operators.put(operator.getName(), operator);
-//		getComponentes().add(operador);
 	}
 
 	@Override

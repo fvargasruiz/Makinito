@@ -4,6 +4,11 @@ import dad.makinito.software.Datum;
 import dad.makinito.software.Info;
 import dad.makinito.software.Instruction;
 
+/**
+ * Pequeña memoria o almacén de datos, que puede contener datos, direcciones o instrucciones.  
+ * 
+ * @author Francisco Vargas
+ */
 public class Register extends Component {
 	private Info content;
 	

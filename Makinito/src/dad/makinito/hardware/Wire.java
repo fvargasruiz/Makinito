@@ -2,6 +2,11 @@ package dad.makinito.hardware;
 
 import dad.makinito.software.Info;
 
+/**
+ * Cable o vía que interconecta dos componentes.
+ * 
+ * @author Francisco Vargas
+ */
 public class Wire extends Component {
 
 	private Register source;

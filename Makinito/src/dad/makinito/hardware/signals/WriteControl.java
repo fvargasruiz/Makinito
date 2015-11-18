@@ -2,6 +2,7 @@ package dad.makinito.hardware.signals;
 
 import dad.makinito.hardware.Memory;
 import dad.makinito.hardware.ControlSignal;
+import dad.makinito.hardware.MakinitoException;
 
 public class WriteControl extends ControlSignal {
 	

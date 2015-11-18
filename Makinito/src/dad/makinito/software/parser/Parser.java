@@ -295,7 +295,14 @@ public class Parser {
 					if (line.matches(INSTRUCTION)) {
 
 						Instruction instruction = parseInstruction(line, labels, first);
-						if (!first) program.getInstructions().add(instruction);
+						if (!first) {
+							if (!makinito.getCPU().getControlUnit().getDecoder().isValidInstruction(instruction)) {
+								throw new ParserException(lineNumber, "Instrucción no válida: " + instruction 
+										+ "\n\nRevisa el nombre de la instrucción y si el número de operandos y/o los modos de direccionamiento"
+										+ " son válidos para esta instrucción.");
+							}
+							program.getInstructions().add(instruction);
+						}
 						memoryAddress++;
 						
 					} else {

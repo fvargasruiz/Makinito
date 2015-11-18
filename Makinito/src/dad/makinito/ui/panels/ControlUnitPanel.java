@@ -83,7 +83,11 @@ public class ControlUnitPanel extends JPanel {
 	}
 
 	public void setPhase(Phase phase) {
-		phaseText.setText(phase.toString());
+		switch (phase) {
+		case DECODIFICATION:	phaseText.setText("DECODIFICACION"); break;
+		case EXECUTION:			phaseText.setText("EJECUCION"); break;
+		case LOADING:			phaseText.setText("CARGA"); break;
+		}
 	}
 
 	public void setProgramCounter(Info info) {

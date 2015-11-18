@@ -2,6 +2,14 @@ package dad.makinito.hardware;
 
 import dad.makinito.software.Datum;
 
+/**
+ * Circuito combinacional de la ALU que lleva a cabo alguna operación.
+ * 
+ * Toma los valores de sus dos entradas, realiza la operación corespondiente, y 
+ * coloca el resultado en la salida y actualiza el registro de estados (RE).
+ * 
+ * @author Francisco Vargas
+ */
 public abstract class Operator extends Component {
 
 	private Register in1;

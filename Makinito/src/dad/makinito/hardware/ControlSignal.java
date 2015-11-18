@@ -1,5 +1,16 @@
 package dad.makinito.hardware;
 
+/**
+ * Las señales de control las activa el secuenciador en el orden adecuado para 
+ * cumplir su cometido (ejecutar las instrucciones del programa cargado en memoria).
+ * 
+ * Las señales de control actúan sobre un componente, provocando que éste realice
+ * alguna acción. Por ejemplo, la señal de lectura (LECT) actúa sobre la memoria 
+ * principal para que ésta lea el contenido la dirección del registro RD y lo 
+ * copie en el registro RM.   
+ *  
+ * @author Francisco Vargas
+ */
 public abstract class ControlSignal {
 	private String name;
 	private String description;

@@ -2,6 +2,15 @@ package dad.makinito.hardware;
 
 import java.util.Map;
 
+/**
+ * La unidad de control es la unidad funcional encargada de recuperar instrucciones de 
+ * la memoria principal (cargarlas), decodificarlas, ejecutarlas y pasar a la siguiente
+ * instrucción de forma cíclica, hasta que se active la señal de control TERM que detiene
+ * la máquina. 
+ * 
+ * @author Francisco Vargas
+ *
+ */
 public class ControlUnit extends FunctionalUnit {
 	private Sequencer sequencer;
 	private Decoder decoder;
@@ -43,7 +52,7 @@ public class ControlUnit extends FunctionalUnit {
 	public Register getProgramCounter() {
 		return programCounter;
 	}
-
+	
 	@Override
 	public void reset() {
 		instructionRegister.reset();

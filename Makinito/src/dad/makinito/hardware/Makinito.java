@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import dad.makinito.Config;
+import dad.makinito.hardware.events.MakinitoListener;
+import dad.makinito.hardware.operators.AdditionOperator;
 import dad.makinito.hardware.operators.ComparisonOperator;
 import dad.makinito.hardware.operators.DivisionOperator;
 import dad.makinito.hardware.operators.MultiplicationOperator;
@@ -20,14 +22,27 @@ import dad.makinito.hardware.signals.ReadControl;
 import dad.makinito.hardware.signals.TermControl;
 import dad.makinito.hardware.signals.WireControl;
 import dad.makinito.hardware.signals.WriteControl;
-import dad.makinito.hardware.operators.AdditionOperator;
 import dad.makinito.software.Program;
 import dad.makinito.software.parser.Parser;
 import dad.makinito.software.parser.ParserException;
 
+/**
+ * Máquina que simula la aquitectura Von Neumann, con los siguientes componentes
+ * interconectados mediante "cables" (Wire):
+ * 
+ * - CPU
+ * 		- Unidad de control
+ * 		- Unidad aritmético-lógica
+ * - Memoria principal
+ * - Bus de datos
+ * - Bus de direcciones
+ * - Reloj
+ * 
+ * @author Francisco Vargas 
+ */
 public class Makinito extends FunctionalUnit {
 
-	private static final Integer FREQUENCY = 1; //
+	private static final Integer FREQUENCY = 1000; //
 	
 	private boolean finish;
 	
@@ -45,6 +60,8 @@ public class Makinito extends FunctionalUnit {
 
 	private Map<String, ControlSignal> signals = new HashMap<String, ControlSignal>();
 
+	public List<MakinitoListener> listeners = new ArrayList<MakinitoListener>();
+	
 	public Makinito() {
 		super();
 		setName("Makinito");
@@ -164,9 +181,9 @@ public class Makinito extends FunctionalUnit {
 		cpu.getControlUnit().init(signals);
 	}
 
-	public void loadProgram(Program programa) {
+	public void loadProgram(Program program) {
 		this.memory.clear();
-		this.program = programa;
+		this.program = program;
 		reset();
 	}
 	
@@ -220,6 +237,7 @@ public class Makinito extends FunctionalUnit {
 
 	public void finish() {
 		this.finish = true;
+		fireFinishedEvent();
 	}
 	
 	public void executeSignal() {
@@ -256,20 +274,34 @@ public class Makinito extends FunctionalUnit {
 		}
 	}
 
-	public void start() {
-		System.out.println("ejecutando programa");
+	public void start(boolean signalLevelExecution) {
+		System.out.println("---> INICIANDO LA EJECUCION DEL PROGRAMA <---");
 		finish = false;
-		long instant; 
 		while (!finish) {
-//			ejecutarPaso();
-			executeInstruction();
+			if (signalLevelExecution)
+				executeSignal();
+			else
+				executeInstruction();
 			System.out.println(this);
 			if (clock.getFrequency() > 0) {
-				instant = System.currentTimeMillis();
-				while (System.currentTimeMillis() - instant < clock.getFrequency() * 10L);
+				try {
+					Thread.sleep(clock.getFrequency());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		System.out.println("---> FIN DEL PROGRAMA <---");
 	}
+	
+	private void fireFinishedEvent() {
+		for (MakinitoListener listener : listeners) {
+			listener.finished();
+		}
+	}
 
+	public List<MakinitoListener> getListeners() {
+		return listeners;
+	}
+	
 }

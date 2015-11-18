@@ -7,12 +7,23 @@ import java.util.Map;
 
 import dad.makinito.hardware.microcode.Condition;
 import dad.makinito.hardware.microcode.InstructionSet;
+import dad.makinito.hardware.microcode.MacroInstruction;
+import dad.makinito.hardware.microcode.MicroInstruction;
+import dad.makinito.hardware.microcode.MicroParameter;
 import dad.makinito.hardware.microcode.MicroProgram;
 import dad.makinito.hardware.microcode.Parameter;
+import dad.makinito.hardware.microcode.SignalInstruction;
 import dad.makinito.software.AddressingMode;
 import dad.makinito.software.Instruction;
 import dad.makinito.software.Operand;
 
+/**
+ * El decodificador se encarga de, a partir de la instrucción almacenada en el registro de instrucción (RI)
+ * y de los flags del Registro de Estados, determinar el conjunto de señales de control adecuadas para 
+ * ejecutar la instrucción.
+ * 
+ * @author Francisco Vargas
+ */
 public class Decoder extends Component {
 	
 	private static final String INSTRUCTION_SET_FILE = "/dad/makinito/hardware/microcode/microcode.xml";
@@ -49,6 +60,10 @@ public class Decoder extends Component {
 		this.flagsRegister = flagsRegister;
 	}
 	
+	public InstructionSet getInstructionSet() {
+		return instructionSet;
+	}
+
 	private Map<String, String> operandsToMap(List<Operand> operands, List<Parameter> parameters) {
 		Map<String, String> map = new HashMap<String, String>();
 		for (int i = 0; i < parameters.size(); i++) {
@@ -62,6 +77,7 @@ public class Decoder extends Component {
 	}
 	
 	private boolean checkConditions(List<Condition> conditions) {
+		if (conditions.isEmpty()) return true;
 		for (Condition condition : conditions) {
 			if (checkCondition(condition)) return true;
 		}
@@ -95,19 +111,27 @@ public class Decoder extends Component {
 		return true;
 	}
 	
+	public MicroProgram searchMicroProgram(Instruction instruction) {
+		MicroProgram mp = instructionSet.search(instruction, makinito);
+		if (mp == null || (mp.isMacro() != null && mp.isMacro())) {
+			return null;
+		}
+		return mp;
+	}
+	
+	public boolean isValidInstruction(Instruction instruction) {
+		return (searchMicroProgram(instruction) != null);
+	}
+	
 	private List<ControlSignal> decode(Instruction instruction) {
 		List<ControlSignal> controlSignals = new ArrayList<ControlSignal>();
 		
-		MicroProgram mp = instructionSet.search(instruction, makinito);
-		
-		if (mp == null || (mp.isMacro() != null && mp.isMacro())) {
-			throw new MakinitoException("Instrucción no válida: " + instruction);
-		}
+		MicroProgram mp = searchMicroProgram(instruction);
 		
 		if (checkConditions(mp.getConditions())) {
 			
 			Map<String, String> parameters = operandsToMap(instruction.getOperands(), mp.getParameters());
-			List<String> signals = mp.getSignals(parameters, instructionSet);
+			List<String> signals = getSignals(mp, parameters);
 			for (String signal : signals) {
 				controlSignals.add(allSignals.get(signal));
 			}
@@ -119,6 +143,53 @@ public class Decoder extends Component {
 		return optimize(controlSignals);
 	}
 
+	private String translate(Map<String, String> parameters, String text) {
+		for (String name : parameters.keySet()) {
+			String value = parameters.get(name);
+			text = text.replaceAll("\\$" + name, value);
+		}
+		return text;
+	}
+	
+	private Map<String, String> parametersToMap(List<MicroParameter> microParameters) {
+		Map<String, String> map = new HashMap<String, String>();
+		for (MicroParameter mp : microParameters) {
+			map.put(mp.getName(), mp.getValue());
+		}
+		return map;
+	}
+	
+	private List<String> getSignals(MicroProgram mp, Map<String, String> parameters) {
+		List<String> signals = new ArrayList<String>();
+		
+		for (MicroInstruction mi : mp.getMicroInstructions()) {
+			
+			if (mi instanceof SignalInstruction) {
+				
+				signals.add(translate(parameters, mi.getName()));
+				
+			} else if (mi instanceof MacroInstruction) {
+				MacroInstruction macro = (MacroInstruction) mi;
+				
+				String macroName = translate(parameters, macro.getName());
+				
+				MicroProgram subMi = instructionSet.search(macroName, macro, parameters);
+
+				Map<String, String> subMiParameters = parametersToMap(macro.getParameters());
+				Map<String, String> translatedParameters = new HashMap<String, String>();
+				for (String name : subMiParameters.keySet()) {
+					String value = subMiParameters.get(name);
+					translatedParameters.put(name, translate(parameters, value));
+				}
+				
+				signals.addAll(getSignals(subMi, translatedParameters));
+			}
+			
+		}
+		
+		return signals;
+	}
+	
 	private List<ControlSignal> optimize(List<ControlSignal> controlSignals) {
 		List<ControlSignal> optimized = new ArrayList<ControlSignal>(controlSignals);
 		ControlSignal previous = null;
@@ -165,14 +236,17 @@ public class Decoder extends Component {
 		Makinito makinito = new Makinito();
 		Decoder decoder = makinito.getCPU().getControlUnit().getDecoder();
 		
-		Instruction i = new Instruction("SUMAR");
-		i.getOperands().add(new Operand(AddressingMode.IMMEDIATE, 5, null));
+		makinito.getCPU().getALU().getFlagsRegister().setNegative(false);
+		makinito.getCPU().getALU().getFlagsRegister().setZero(false);
+		
+		Instruction i = new Instruction("SALTAR-SI-MA");
+//		i.getOperands().add(new Operand(AddressingMode.IMMEDIATE, 5, null));
 //		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("AC"), "AC"));
-//		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
+		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
 //		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
 //		i.getOperands().add(new Operand(AddressingMode.INDIRECT, 9, null));
 //		i.getOperands().add(new Operand(AddressingMode.INDIRECT, 9, null));
-		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("RT"), "RT"));
+//		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("RT"), "RT"));
 //		i.getOperands().add(new Operand(AddressingMode.IMMEDIATE, 5, null));
 		
 		System.out.println(i);

@@ -1,5 +1,11 @@
 package dad.makinito.hardware;
 
+/**
+ * El cerebro de Makinito (el microprocesador), contiene la unidad de control y 
+ * la unidad aritmético-lógica.
+ * 
+ * @author Francisco Vargas
+ */
 public class CPU extends FunctionalUnit {
 	private ALU alu;						// unidad aritmético-lógica
 	private ControlUnit controlUnit;		// unidad de control

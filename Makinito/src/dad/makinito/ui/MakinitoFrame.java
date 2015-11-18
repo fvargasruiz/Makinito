@@ -40,6 +40,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import dad.makinito.Config;
 import dad.makinito.hardware.Makinito;
 import dad.makinito.hardware.MakinitoException;
+import dad.makinito.hardware.events.MakinitoAdapter;
 import dad.makinito.software.parser.ParserException;
 import dad.makinito.ui.panels.BusPanel;
 import dad.makinito.ui.panels.CPUPanel;
@@ -68,11 +69,20 @@ public class MakinitoFrame extends JFrame {
 	private MemoryPanel memoryPanel;
 	
 	public MakinitoFrame() {
-		this.makinito = new Makinito();
-		this.makinito.getClock().setFrequency(FREQUENCY);
+		initMakinito();
 		initFrame();
 		initComponents();
 		init();
+	}
+
+	private void initMakinito() {
+		this.makinito = new Makinito();
+		this.makinito.getClock().setFrequency(FREQUENCY);		
+		this.makinito.getListeners().add(new MakinitoAdapter() {
+			public void finished() {
+				onMakinitoFinished();
+			};
+		});
 	}
 
 	private void initFrame() {
@@ -261,7 +271,7 @@ public class MakinitoFrame extends JFrame {
 		} catch (MakinitoException ex) {
 			onStopButtonActionPerformed(e);
 			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fin de programa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
 			else 
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -304,7 +314,7 @@ public class MakinitoFrame extends JFrame {
 			update();
 		} catch (MakinitoException ex) {
 			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fin de programa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
 			else 
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}		
@@ -316,7 +326,7 @@ public class MakinitoFrame extends JFrame {
 			update();
 		} catch (MakinitoException ex) {
 			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Fin de programa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
 			else 
 				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -385,7 +395,7 @@ public class MakinitoFrame extends JFrame {
 					"Cargar programa", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 			loaded = false;
-		}
+		} 
 		return loaded;
 	}
 	
@@ -439,6 +449,11 @@ public class MakinitoFrame extends JFrame {
 				}
 			}
 		});
+	}
+
+	protected void onMakinitoFinished() {
+		stop();
+		JOptionPane.showMessageDialog(this, "El programa ha terminado correctamente.", "Fin de programa", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 }

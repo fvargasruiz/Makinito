@@ -3,6 +3,7 @@ package dad.makinito.hardware.microcode;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -32,9 +33,9 @@ public class InstructionSet {
 		microprograms.add(microProgram);
 	}
 	
-	public MicroProgram search(MacroInstruction macro) {
+	public MicroProgram search(String name, MacroInstruction macro, Map<String, String> parameters) {
 		for (MicroProgram microprogram : microprograms) {
-			if (microprogram.getName().equals(macro.getName()) && 
+			if (microprogram.getName().equals(name) && 
 				microprogram.getParameters().size() == macro.getParameters().size()) {
 				boolean ok = true;
 				for (int i = 0; i < microprogram.getParameters().size() && ok; i++) {

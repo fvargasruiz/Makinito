@@ -3,6 +3,12 @@ package dad.makinito.hardware;
 import dad.makinito.software.Datum;
 import dad.makinito.software.Info;
 
+/**
+ * Memoria principal (RAM) de la máquina. Contiene datos e instrucciones del programa
+ * en ejecución.
+ * 
+ * @author Francisco Vargas
+ */
 public class Memory extends FunctionalUnit {
 	private Info[] content;
 	private Register memoryRegister; 	// registro de memoria

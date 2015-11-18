@@ -1,6 +1,13 @@
 package dad.makinito.hardware;
 
-public class Clock {
+/**
+ * Reloj del sistema: encargado de marcar los tiempos del secuenciador para que éste lance 
+ * de forma ordenada en cada pulso la señal de control adecuada.
+ * 
+ * @author Francisco Vargas
+ *
+ */
+public class Clock extends Component {
 	private Integer frequency;
 	private Sequencer sequencer;
 
@@ -28,6 +35,10 @@ public class Clock {
 
 	public void pulse() {
 		sequencer.execute();
+	}
+
+	@Override
+	public void reset() {
 	}
 
 }
