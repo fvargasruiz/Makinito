@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<instructionSet>
+    <microprogram name="MOVER">
+        <conditions>
+            <condition carry="false" negative="true" zero="true"/>
+        </conditions>
+        <microInstructions>
+            <signalInstruction name="BD-AC"/>
+            <signalInstruction name="AC-RT"/>
+            <macroInstruction name="OPERAND-TO-ALU">
+                <parameter name="cde" value="1"/>
+                <parameter name="reg" value="AC"/>
+            </macroInstruction>
+            <signalInstruction name="ICP"/>
+        </microInstructions>
+        <parameters>
+            <parameter addressingMode="REGISTER" name="reg"/>
+            <parameter addressingMode="IMMEDIATE"/>
+        </parameters>
+    </microprogram>
+</instructionSet>
