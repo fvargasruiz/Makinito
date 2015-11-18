@@ -1,8 +1,7 @@
 package dad.makinito.hardware.signals;
 
-import dad.makinito.hardware.Memory;
 import dad.makinito.hardware.ControlSignal;
-import dad.makinito.hardware.MakinitoException;
+import dad.makinito.hardware.Memory;
 
 public class ReadControl extends ControlSignal {
 	
