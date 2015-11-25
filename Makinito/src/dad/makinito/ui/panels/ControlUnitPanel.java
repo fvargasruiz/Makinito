@@ -84,9 +84,9 @@ public class ControlUnitPanel extends JPanel {
 
 	public void setPhase(Phase phase) {
 		switch (phase) {
-		case DECODIFICATION:	phaseText.setText("DECODIFICACION"); break;
-		case EXECUTION:			phaseText.setText("EJECUCION"); break;
-		case LOADING:			phaseText.setText("CARGA"); break;
+		case DECODE:	phaseText.setText("DECODIFICACION"); break;
+		case EXECUTE:			phaseText.setText("EJECUCION"); break;
+		case FETCH:			phaseText.setText("CARGA"); break;
 		}
 	}
 

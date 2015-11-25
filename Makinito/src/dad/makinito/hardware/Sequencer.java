@@ -44,7 +44,7 @@ public class Sequencer extends Component {
 	}
 
 	public boolean isNewInstruction() {
-		return (phase == Phase.LOADING && current == 0);
+		return (phase == Phase.FETCH && current == 0);
 	}
 
 	private void initLoading(Map<String, ControlSignal> signals) {
@@ -66,16 +66,16 @@ public class Sequencer extends Component {
 	
 	private void nextPhase() {
 		switch (this.phase) {
-		case LOADING: 
-			this.phase = Phase.DECODIFICATION;
+		case FETCH: 
+			this.phase = Phase.DECODE;
 			this.signals = decofification;
 			break;
-		case DECODIFICATION: 
-			this.phase = Phase.EXECUTION;
+		case DECODE: 
+			this.phase = Phase.EXECUTE;
 			this.signals = execution;
 			break;
-		case EXECUTION: 
-			this.phase = Phase.LOADING;
+		case EXECUTE: 
+			this.phase = Phase.FETCH;
 			this.signals = loading;
 			break;
 		}
@@ -119,7 +119,7 @@ public class Sequencer extends Component {
 
 	@Override
 	public void reset() {
-		this.phase = Phase.LOADING;
+		this.phase = Phase.FETCH;
 		this.current = 0;
 		this.signals = loading;
 	}
