@@ -140,6 +140,8 @@ public class Decoder extends Component {
 			controlSignals.add(allSignals.get("ICP"));
 		}
 		
+		System.out.println(controlSignals);
+		
 		return optimize(controlSignals);
 	}
 
@@ -203,6 +205,7 @@ public class Decoder extends Component {
 					if (prev[0].equals(curr[1]) && prev[1].equals(curr[0])) {
 						optimized.remove(signal);
 						optimized.remove(previous);
+						signal = null;
 					}
 				}
 			}
@@ -239,10 +242,11 @@ public class Decoder extends Component {
 		makinito.getCPU().getALU().getFlagsRegister().setNegative(false);
 		makinito.getCPU().getALU().getFlagsRegister().setZero(false);
 		
-		Instruction i = new Instruction("SALTAR-SI-MA");
+		Instruction i = new Instruction("MULTIPLICAR");
 //		i.getOperands().add(new Operand(AddressingMode.IMMEDIATE, 5, null));
-//		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("AC"), "AC"));
-		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
+		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("AC"), "AC"));
+		i.getOperands().add(new Operand(AddressingMode.REGISTER, makinito.encodeRegister("AC"), "AC"));
+//		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
 //		i.getOperands().add(new Operand(AddressingMode.DIRECT, 12, null));
 //		i.getOperands().add(new Operand(AddressingMode.INDIRECT, 9, null));
 //		i.getOperands().add(new Operand(AddressingMode.INDIRECT, 9, null));
