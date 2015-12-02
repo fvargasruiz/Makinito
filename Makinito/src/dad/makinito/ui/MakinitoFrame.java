@@ -37,10 +37,11 @@ import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import dad.makinito.Config;
+import dad.makinito.config.Config;
 import dad.makinito.hardware.Makinito;
 import dad.makinito.hardware.MakinitoException;
 import dad.makinito.hardware.events.MakinitoAdapter;
+import dad.makinito.i18n.Messages;
 import dad.makinito.software.parser.ParserException;
 import dad.makinito.ui.panels.BusPanel;
 import dad.makinito.ui.panels.CPUPanel;
@@ -126,41 +127,41 @@ public class MakinitoFrame extends JFrame {
 	private JPanel initControlPanel() {
 		JPanel controlPanel = new JPanel(new FlowLayout());
 		
-		instructionCheck = new JCheckBox("Instrucción");
-		instructionCheck.setToolTipText("Si se activa, se ejecutan instrucciones completas, en vez de señales de control");
+		instructionCheck = new JCheckBox(Messages.getString("makinitoFrame.controlPanel.instruccionCheck.text"));
+		instructionCheck.setToolTipText(Messages.getString("makinitoFrame.controlPanel.instruccionCheck.toolTipText"));
 
 		stopButton = new JButton(Icons.PAUSE);
-		stopButton.setToolTipText("Detener la ejecución");
+		stopButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.stopButton.toolTipText"));
 		stopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onStopButtonActionPerformed(e); }
 		});
 
 		startButton = new JButton(Icons.PLAY);
-		startButton.setToolTipText("Iniciar la ejecución");
+		startButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.startButton.toolTipText"));
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onStartButtonActionPerformed(e); }
 		});
 
 		stepButton = new JButton(Icons.STEP);
-		stepButton.setToolTipText("Ejecutar una señal de control");
+		stepButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.stepButton.toolTipText"));
 		stepButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onStepButtonActionPerformed(e); }
 		});
 
 		instButton = new JButton(Icons.NEXT);
-		instButton.setToolTipText("Ejecutar todas las señales de control de la instrucción actual");
+		instButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.instButton.toolTipText"));
 		instButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onInstButtonActionPerformed(e); }
 		});
 		
 		restartButton = new JButton(Icons.RELOAD);
-		restartButton.setToolTipText("Reiniciar el programa");
+		restartButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.restartButton.toolTipText"));
 		restartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onRestartButtonActionPerformed(e); }
 		});
 		
-		reloadButton = new JButton("Recargar");
-		reloadButton.setToolTipText("Vuelve a cargar el programa del fichero '.maki'");
+		reloadButton = new JButton(Messages.getString("makinitoFrame.controlPanel.reloadButton.text"));
+		reloadButton.setToolTipText(Messages.getString("makinitoFrame.controlPanel.reloadButton.toolTipText"));
 		reloadButton.setPreferredSize(new Dimension((int)reloadButton.getPreferredSize().getWidth(), (int)restartButton.getPreferredSize().getHeight()));
 		reloadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { onReloadButtonActionPerformed(e); }
@@ -168,7 +169,7 @@ public class MakinitoFrame extends JFrame {
 		
 		SpinnerModel frequencyModel = new SpinnerNumberModel(FREQUENCY, 1, 10000, 100);
 		frequencySpinner = new JSpinner(frequencyModel);
-		frequencySpinner.setToolTipText("Frecuencia del reloj en segundos");
+		frequencySpinner.setToolTipText(Messages.getString("makinitoFrame.controlPanel.frequencySpinner.toolTipText"));
 		frequencySpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) { onFrecuenciaSpinnerStateChanged(e); }
 		});
@@ -180,7 +181,7 @@ public class MakinitoFrame extends JFrame {
 		controlPanel.add(instButton);
 		controlPanel.add(restartButton);
 		controlPanel.add(reloadButton);
-		controlPanel.add(new JLabel("Frecuencia:"));
+		controlPanel.add(new JLabel(Messages.getString("makinitoFrame.controlPanel.frequencyLabel.text")));
 		controlPanel.add(frequencySpinner);
 		controlPanel.add(new JLabel("ms"));
 		
@@ -192,8 +193,8 @@ public class MakinitoFrame extends JFrame {
 		
 		memoryPanel = new MemoryPanel(); 
 		cpuPanel = new CPUPanel(); 
-		dataBusPanel = new BusPanel("Bus de datos");
-		addressBusPanel = new BusPanel("Bus de direcciones");
+		dataBusPanel = new BusPanel(Messages.getString("makinitoFrame.makinitoPanel.dataBusPanel.title"));
+		addressBusPanel = new BusPanel(Messages.getString("makinitoFrame.makinitoPanel.addressBusPanel.title"));
 		
 		centerPanel.add(cpuPanel, new GridBagConstraints(0, 0, 1, 1, 0.66, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
 		centerPanel.add(dataBusPanel, new GridBagConstraints(0, 1, 1, 1, 0.66, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(5, 5, 5, 5), 0, 0));
@@ -204,7 +205,7 @@ public class MakinitoFrame extends JFrame {
 	}
 
 	private void initMenuBar() {
-		JMenuItem openMenuItem = new JMenuItem("Abrir", Icons.ABRIR);
+		JMenuItem openMenuItem = new JMenuItem(Messages.getString("makinitoFrame.fileMenu.openMenuItem.text"), Icons.ABRIR);
 		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 		openMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,26 +213,26 @@ public class MakinitoFrame extends JFrame {
 			}
 		});
 
-		JMenuItem exitMenuItem = new JMenuItem("Salir");
+		JMenuItem exitMenuItem = new JMenuItem(Messages.getString("makinitoFrame.fileMenu.exitMenuItem.text"));
 		exitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				onExitMenuItemActionPerformed(e);
 			}
 		});
 
-		JMenu fileMenu = new JMenu("Archivo");
+		JMenu fileMenu = new JMenu(Messages.getString("makinitoFrame.fileMenu.text"));
 		fileMenu.add(openMenuItem);
 		fileMenu.addSeparator();
 		fileMenu.add(exitMenuItem);
 
-		JMenuItem aboutMenuItem = new JMenuItem("Acerca de...");
+		JMenuItem aboutMenuItem = new JMenuItem(Messages.getString("makinitoFrame.helpMenu.aboutMenuItem.text"));
 		aboutMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				onAboutMenuItemActionPerformed(e);
 			}
 		});
 		
-		JMenu helpMenu = new JMenu("Ayuda");
+		JMenu helpMenu = new JMenu(Messages.getString("makinitoFrame.helpMenu.text"));
 		helpMenu.add(aboutMenuItem);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -270,10 +271,7 @@ public class MakinitoFrame extends JFrame {
 			update();
 		} catch (MakinitoException ex) {
 			onStopButtonActionPerformed(e);
-			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
-			else 
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			checkIfFinished(ex);
 		}
 	}
 
@@ -313,11 +311,23 @@ public class MakinitoFrame extends JFrame {
 			makinito.executeSignal();
 			update();
 		} catch (MakinitoException ex) {
-			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
-			else 
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			checkIfFinished(ex);
 		}		
+	}
+
+	private void checkIfFinished(MakinitoException ex) {
+		if (makinito.isFinished())
+			JOptionPane.showMessageDialog(this, 
+					ex.getMessage() + "\n\n" + Messages.getString("makinitoFrame.warningDialog.mustRestart.message"), 
+					Messages.getString("makinitoFrame.warningDialog.mustRestart.title"), 
+					JOptionPane.WARNING_MESSAGE
+				);
+		else 
+			JOptionPane.showMessageDialog(this, 
+					ex.getMessage(), 
+					Messages.getString("makinitoFrame.errorDialog.title"), 
+					JOptionPane.ERROR_MESSAGE
+				);
 	}
 	
 	private void nextInstruction() {
@@ -325,10 +335,7 @@ public class MakinitoFrame extends JFrame {
 			makinito.executeInstruction();
 			update();
 		} catch (MakinitoException ex) {
-			if (makinito.isFinished())
-				JOptionPane.showMessageDialog(this, ex.getMessage() + "\n\nDebes reiniciar el programa para poder ejecutarlo otra vez.", "Fin de programa", JOptionPane.WARNING_MESSAGE);
-			else 
-				JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			checkIfFinished(ex);
 		}
 	}
 	
@@ -338,7 +345,11 @@ public class MakinitoFrame extends JFrame {
 	}
 	
 	private void exit() {
-		int result = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int result = JOptionPane.showConfirmDialog(this, 
+				Messages.getString("makinitoFrame.confirmDialog.exit.message"), 
+				Messages.getString("makinitoFrame.confirmDialog.exit.title"), 
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE
+			);
 		if (result == JOptionPane.YES_OPTION) {
 			stop();
 			dispose();
@@ -363,8 +374,9 @@ public class MakinitoFrame extends JFrame {
 		JFileChooser openDialog = new JFileChooser(new File("."));
 		FileFilter allFileFilter = openDialog.getChoosableFileFilters()[0];
 		openDialog.removeChoosableFileFilter(openDialog.getChoosableFileFilters()[0]);
-		openDialog.addChoosableFileFilter(new FileNameExtensionFilter("Programas Makinito (*.maki)", "maki"));
+		openDialog.addChoosableFileFilter(new FileNameExtensionFilter(Messages.getString("makinitoFrame.openDialog.filter.makiFiles"), "maki"));
 		openDialog.addChoosableFileFilter(allFileFilter);
+		openDialog.setSelectedFile(file);
 		int resultado = openDialog.showOpenDialog(this);
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			File newFile = openDialog.getSelectedFile();
@@ -379,20 +391,33 @@ public class MakinitoFrame extends JFrame {
 			if (file != null) {
 				makinito.loadProgram(file);
 				init();
-				JOptionPane.showMessageDialog(this, "Se ha cargado el programa '" + file.getName() + "' correctamente.", "Cargar programa", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, 
+						Messages.getString("makinitoFrame.infoDialog.loadProgram.message", file.getName()), 
+						Messages.getString("makinitoFrame.infoDialog.loadProgram.title"), 
+						JOptionPane.INFORMATION_MESSAGE
+					);
 			} else {
-				JOptionPane.showMessageDialog(this, "Aún no ha cargado ningún programa en Makinito", "Recargar programa", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, 
+						Messages.getString("makinitoFrame.warningDialog.loadProgram.message"), 
+						Messages.getString("makinitoFrame.warningDialog.loadProgram.title"), 
+						JOptionPane.ERROR_MESSAGE
+					);
 				loaded = false;
 			}
 		} catch (IOException e1) {
-			JOptionPane.showMessageDialog(this, "No ha sido posible abrir el archivo '" + file.getName() + "'.\n\n" + e1.getMessage(), "Cargar programa", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, 
+					Messages.getString("makinitoFrame.errorDialog.loadProgram.message", file.getName()) + "\n\n" + e1.getMessage(), 
+					Messages.getString("makinitoFrame.errorDialog.loadProgram.title"), 
+					JOptionPane.ERROR_MESSAGE
+				);
 			e1.printStackTrace();
 			loaded = false;
 		} catch (ParserException e1) {
 			JOptionPane.showMessageDialog(this, 
-					"No se ha podido cargar el programa '" + file.getName() + "' debido a un error en la línea " + e1.getLine() + "\n\n" +  
-					e1.getMessage(), 
-					"Cargar programa", JOptionPane.ERROR_MESSAGE);
+					Messages.getString("makinitoFrame.errorDialog.parseProgram.message", file.getName(), e1.getLine()) + "\n\n" +  e1.getMessage(), 
+					Messages.getString("makinitoFrame.errorDialog.parseProgram.title"), 
+					JOptionPane.ERROR_MESSAGE
+				);
 			e1.printStackTrace();
 			loaded = false;
 		} 
@@ -444,7 +469,11 @@ public class MakinitoFrame extends JFrame {
 					UIManager.setLookAndFeel(LAF_NIMBUS);
 					new MakinitoFrame().setVisible(true);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Se ha producido un error al iniciar la aplicación:\n\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, 
+							Messages.getString("makinitoFrame.errorDialog.main.message") + ":\n\n" + e.getMessage(), 
+							Messages.getString("makinitoFrame.errorDialog.main.title"), 
+							JOptionPane.ERROR_MESSAGE
+						);
 					e.printStackTrace();
 				}
 			}
@@ -453,7 +482,11 @@ public class MakinitoFrame extends JFrame {
 
 	protected void onMakinitoFinished() {
 		stop();
-		JOptionPane.showMessageDialog(this, "El programa ha terminado correctamente.", "Fin de programa", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, 
+				Messages.getString("makinitoFrame.infoDialog.makinitoFinished.message"), 
+				Messages.getString("makinitoFrame.infoDialog.makinitoFinished.title"), 
+				JOptionPane.INFORMATION_MESSAGE
+			);
 	}
 
 }

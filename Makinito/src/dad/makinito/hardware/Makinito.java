@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dad.makinito.Config;
+import dad.makinito.config.Config;
 import dad.makinito.hardware.events.MakinitoListener;
 import dad.makinito.hardware.operators.AdditionOperator;
 import dad.makinito.hardware.operators.ComparisonOperator;

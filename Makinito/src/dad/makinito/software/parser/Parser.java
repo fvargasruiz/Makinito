@@ -41,7 +41,7 @@ public class Parser {
 	private static final String OPERAND					= "(" + IMMEDIATE + "|" + DIRECT + "|" + INDIRECT + ")";
 
 	private static final String INSTRUCTION				= "(^" + ID + ":)?" + SPACE + ID + SPACE + OPERAND + "?" + "(," + OPERAND + ")*" + OPT_COMMENT;
-	private static final String ASSIGNMENT 				= SPACE + ID + "=" + "(" + VALUE + "|\\?)" + OPT_COMMENT;
+	private static final String ASSIGNMENT 				= SPACE + ID + SPACE + "=" + SPACE + "(" + VALUE + "|\\?)" + OPT_COMMENT;
 	
 	private static final String BEGIN_CODE 				= "^BEGIN-CODE" + OPT_COMMENT;
 	private static final String END_CODE 				= "^END-CODE" + OPT_COMMENT;
@@ -163,7 +163,10 @@ public class Parser {
 		String operands;
 
 		// hay etiqueta
-		if (line.matches("^" + ID + ":.*")) {
+		if (line.matches("^" + ID + ":" + SPACE + "$")) {
+			String etiqueta = parts[0];
+			throw new ParserException(lineNumber, "Se encontró la etiqueta '" + etiqueta + "' suelta, sin instrucción.");
+		} else if (line.matches("^" + ID + ":.*")) {
 			mnemonic = parts[1];
 			operands = parts.length > 2 ? parts[2] : null;
 			parseLabel(line, labels, memoryAddress, first);
@@ -174,10 +177,6 @@ public class Parser {
 		
 		Instruction instruction = null;
 		if (!first) {
-			// TODO buscar si es un mnemónico válido 
-//			if (!isMnemonic(mnemonic)) {
-//				throw new LoaderException(lineNumber, "El identificador '" + mnemonic + "' no corresponde con una instrucción válida del juego de instrucciones de makinito:\n\n" + line);
-//			}
 			instruction = new Instruction();
 			instruction.setOpCode(mnemonic);
 			instruction.getOperands().addAll(parseOperands(operands, labels));
@@ -188,7 +187,7 @@ public class Parser {
 	
 	private Datum parseDatum(String line) {
 		line = line.trim();
-		String parts[] = line.split("=");
+		String parts[] = line.split(SPACE + "=" + SPACE);
 		String value = parts[1].split("\\h+")[0];
 		return new Datum("?".equals(value) ? 0 : Integer.parseInt(value));
 	}
@@ -196,7 +195,7 @@ public class Parser {
 	private void parseIdentifier(String line, Map<String, Integer> labels, Integer memoryAddress, boolean first) {
 		if (first) {
 			line = line.trim();
-			String parts[] = line.split("=");
+			String parts[] = line.split(SPACE + "=" + SPACE);
 			labels.put(parts[0].toUpperCase(), memoryAddress);
 		}
 	}

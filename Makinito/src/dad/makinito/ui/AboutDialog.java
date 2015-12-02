@@ -7,7 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import dad.makinito.Config;
+import dad.makinito.config.Config;
+import dad.makinito.i18n.Messages;
 import dad.makinito.ui.resources.Icons;
 
 @SuppressWarnings("serial")
@@ -20,7 +21,7 @@ public class AboutDialog extends JDialog {
 	}
 	
 	private void initDialog() {
-		setTitle("Acerca de Makinito");
+		setTitle(Messages.getString("aboutDialog.title"));
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(320, 300);
@@ -32,14 +33,7 @@ public class AboutDialog extends JDialog {
 		JLabel aboutLabel = new JLabel(new ImageIcon(Icons.LOGO_GRANDE));
 		aboutLabel.setHorizontalTextPosition(JLabel.CENTER);
 		aboutLabel.setVerticalTextPosition(JLabel.BOTTOM);
-		aboutLabel.setText(
-				"<html><center>"
-				+ "<h1>Makinito</h1>"
-				+ "Versión " + Config.getVersion() + "<br/>"
-				+ "Simulador de la arquitectura Von Neumann<br/>"
-				+ "Autor: <u>Francisco Vargas Ruiz</u>"
-				+ "</center></html>"
-				);
+		aboutLabel.setText(Messages.getString("aboutDialog.aboutLabel.text", Config.getVersion()));
 		
 		getContentPane().add(aboutLabel, BorderLayout.CENTER);
 	}
