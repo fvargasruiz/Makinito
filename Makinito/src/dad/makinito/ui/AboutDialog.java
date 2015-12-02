@@ -30,7 +30,7 @@ public class AboutDialog extends JDialog {
 	
 	private void initComponents() {
 		
-		JLabel aboutLabel = new JLabel(new ImageIcon(Icons.LOGO_GRANDE));
+		JLabel aboutLabel = new JLabel(new ImageIcon(Icons.LOGO_BIG));
 		aboutLabel.setHorizontalTextPosition(JLabel.CENTER);
 		aboutLabel.setVerticalTextPosition(JLabel.BOTTOM);
 		aboutLabel.setText(Messages.getString("aboutDialog.aboutLabel.text", Config.getVersion()));

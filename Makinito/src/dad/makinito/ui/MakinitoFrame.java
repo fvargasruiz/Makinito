@@ -90,7 +90,7 @@ public class MakinitoFrame extends JFrame {
 		setSize(720, 640);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		setIconImage(Icons.LOGO);
+		setIconImage(Icons.LOGO_SMALL);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) { onWindowClosing(e); }
 		});
@@ -205,7 +205,7 @@ public class MakinitoFrame extends JFrame {
 	}
 
 	private void initMenuBar() {
-		JMenuItem openMenuItem = new JMenuItem(Messages.getString("makinitoFrame.fileMenu.openMenuItem.text"), Icons.ABRIR);
+		JMenuItem openMenuItem = new JMenuItem(Messages.getString("makinitoFrame.fileMenu.openMenuItem.text"), Icons.OPEN);
 		openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
 		openMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

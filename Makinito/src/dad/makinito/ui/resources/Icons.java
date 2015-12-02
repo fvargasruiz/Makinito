@@ -6,9 +6,9 @@ import javax.swing.ImageIcon;
 
 public class Icons {
 	
-	public static final Image LOGO = loadIcon("cpu-32.png").getImage();
-	public static final Image LOGO_GRANDE = loadIcon("cpu-256.png").getImage();
-	public static final ImageIcon ABRIR = loadIcon("abrir.gif");
+	public static final Image LOGO_SMALL = loadIcon("cpu-32.png").getImage();
+	public static final Image LOGO_BIG = loadIcon("cpu-256.png").getImage();
+	public static final ImageIcon OPEN = loadIcon("open.gif");
 	public static final ImageIcon PAUSE = loadIcon("pause-24.png");
 	public static final ImageIcon PLAY = loadIcon("play-24.png");
 	public static final ImageIcon STEP = loadIcon("step-24.png");
