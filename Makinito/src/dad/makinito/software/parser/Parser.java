@@ -278,7 +278,13 @@ public class Parser {
 						if (first)
 							parseIdentifier(line, labels, memoryAddress, first);
 						else {
-							program.getData().add(parseDatum(line));
+							
+							try {
+								program.getData().add(parseDatum(line));
+							} catch (NumberFormatException e) {
+								throw new ParserException(lineNumber, "Error en el bloque de datos:\n\n" + line);
+							}
+								
 						}
 						
 						memoryAddress++;

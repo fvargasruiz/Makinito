@@ -1996,7 +1996,7 @@
     <microprogram name="SALTAR-SI-MAI">
     	<conditions>
     		<condition negative="false" />
-    		<condition zero="false" />
+    		<condition zero="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="IMMEDIATE"/>
@@ -2013,7 +2013,7 @@
     <microprogram name="SALTAR-SI-MAI">
     	<conditions>
     		<condition negative="false" />
-    		<condition zero="false" />
+    		<condition zero="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="DIRECT"/>
@@ -2030,7 +2030,7 @@
     <microprogram name="SALTAR-SI-MAI">
     	<conditions>
     		<condition negative="false" />
-    		<condition zero="false" />
+    		<condition zero="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="INDIRECT"/>
@@ -2047,7 +2047,7 @@
     <microprogram name="SALTAR-SI-MAI">
     	<conditions>
     		<condition negative="false" />
-    		<condition zero="false" />
+    		<condition zero="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="REGISTER" name="reg"/>
