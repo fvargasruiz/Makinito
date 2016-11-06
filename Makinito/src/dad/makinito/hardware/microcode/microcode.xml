@@ -2260,6 +2260,7 @@
     <microprogram name="SALTAR-SI-NIG">
     	<conditions>
     		<condition zero="false" />
+    		<condition negative="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="IMMEDIATE"/>
@@ -2276,6 +2277,7 @@
     <microprogram name="SALTAR-SI-NIG">
     	<conditions>
     		<condition zero="false" />
+    		<condition negative="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="DIRECT"/>
@@ -2292,6 +2294,7 @@
     <microprogram name="SALTAR-SI-NIG">
     	<conditions>
     		<condition zero="false" />
+    		<condition negative="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="INDIRECT"/>
@@ -2308,6 +2311,7 @@
 	<microprogram name="SALTAR-SI-NIG">
     	<conditions>
     		<condition zero="false" />
+    		<condition negative="true" />
 		</conditions>
 		<parameters>
             <parameter addressingMode="REGISTER" name="reg"/>

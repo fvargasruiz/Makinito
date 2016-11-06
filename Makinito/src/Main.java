@@ -7,9 +7,9 @@ import dad.makinito.software.parser.ParserException;
 
 public class Main {
 	
-	public static final String EJEMPLO1 = "ejemplos/ejemplo1-multiplicar.maki";
-	public static final String EJEMPLO2 = "ejemplos/ejemplo2-factorial.maki";
-	public static final String EJEMPLO3 = "ejemplos/ejemplo3-salto-incondicional.maki";
+	public static final String EJEMPLO1 = "samples/ejemplo1-multiplicar.maki";
+	public static final String EJEMPLO2 = "samples/ejemplo2-factorial.maki";
+	public static final String EJEMPLO3 = "samples/ejemplo3-salto-incondicional.maki";
 
 	public static void main(String[] args) throws IOException, MakinitoException {
 		try {
